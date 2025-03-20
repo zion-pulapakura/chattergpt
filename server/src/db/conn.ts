@@ -1,6 +1,6 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion, Db } from "mongodb";
 
-const uri = process.env.ATLAS_URI || "";
+const uri = process.env.DB_CONNECT || "";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -10,7 +10,7 @@ const client = new MongoClient(uri, {
   }
 });
 
-let db;
+let db: Db;
 
 try {
   const conn = await client.connect();
@@ -20,4 +20,4 @@ try {
   console.error(e);
 }
 
-export default db
+export default db!
