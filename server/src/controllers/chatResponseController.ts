@@ -5,6 +5,7 @@ const chatResponse = async (req: Request, res: Response): Promise<any> => {
   try {
     const { userInput } = req.body;
     const client = new OpenAI();
+    console.log(1)
 
     const completion = await client.chat.completions.create({
       model: "gpt-4o",
@@ -15,10 +16,11 @@ const chatResponse = async (req: Request, res: Response): Promise<any> => {
         },
       ],
     });
+    console.log(2)
 
     return res.json({ message: "Success", data: completion.choices[0].message.content });
-  } catch (error) {
-    return res.status(500).json({ message: "Error answering the question" });
+  } catch (e) {
+    return res.status(500).json({ message: (e as Error).message });
   }
 };
 
