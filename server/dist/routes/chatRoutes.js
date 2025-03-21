@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import chatResponse from '../controllers/chatResponseController.js';
+import chatResponseController from '../controllers/chatResponseController.js';
 const router = Router();
-router.post('/respond', chatResponse);
+router.post('/respond', chatResponseController);
 export default router;
