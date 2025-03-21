@@ -12,11 +12,7 @@ async function chatResponseService(userInput: string) {
     const json = await response.json();
     console.log(json);
   } catch (e) {
-    if (e instanceof Error) {
-      console.error(e.message);
-    } else {
-      console.log("Something went wrong");
-    }
+    console.error((e as Error).message);
   }
 }
 
