@@ -21,7 +21,7 @@ const chatResponseController = async (req: Request, res: Response): Promise<any>
     res.setHeader("Content-Type", "text/plain");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-
+    
     for await (const chunk of stream) {
       if (chunk.choices[0].delta?.content) {
         res.write(chunk.choices[0].delta.content);

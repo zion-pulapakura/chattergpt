@@ -22,9 +22,7 @@ async function chatResponseService(
       
       if (done) break;
       
-      console.log(Date.now())
-      console.log(decoder.decode(value, { stream: true }))
-      onData(decoder.decode(value, { stream: true })); // Directly pass text to callback
+      onData(decoder.decode(value, { stream: true }));
     }
   } catch (e) {
     console.error((e as Error));

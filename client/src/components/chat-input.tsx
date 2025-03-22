@@ -13,7 +13,7 @@ export const ChatInput = () => {
   const handleChat = async () => {
     setMessages("");
 
-    await chatResponseService("Hello!", (chunk) => {
+    await chatResponseService(userChat, (chunk) => {
       setMessages((prev) => prev + chunk);
     });
   };
