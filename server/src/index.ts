@@ -2,7 +2,7 @@ import "./loadEnv.js";
 
 import express from "express";
 import cors from "cors";
-import chatRouter from "./routes/chatRoutes.js";
+import chatRouter from "./routes/chat-routes.js";
 
 const app = express();
 app.use(express.json());

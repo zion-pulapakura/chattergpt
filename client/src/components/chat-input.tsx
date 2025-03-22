@@ -1,8 +1,8 @@
-import userChatAtom from "@/state/userChatAtom";
+import userChatAtom from "@/state/user-chat-atom";
 import { IconButton, Group, Input } from "@chakra-ui/react";
 import { IoIosSend } from "react-icons/io";
 import { useAtomValue, useSetAtom } from "jotai";
-import chatResponseService from "@/services/chatResponseService";
+import chatResponseService from "@/services/chat-response-service";
 import { useState } from "react";
 
 export const ChatInput = () => {
