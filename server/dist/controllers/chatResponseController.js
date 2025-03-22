@@ -8,6 +8,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 import OpenAI from "openai";
 const chatResponseController = async (req, res) => {
     var _a, e_1, _b, _c;
+    var _d;
     try {
         const { userInput } = req.body;
         const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -19,20 +20,26 @@ const chatResponseController = async (req, res) => {
                     content: userInput,
                 },
             ],
-            stream: true
+            stream: true,
+            max_tokens: 100
         });
+        res.setHeader("Content-Type", "text/plain");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
         try {
-            for (var _d = true, stream_1 = __asyncValues(stream), stream_1_1; stream_1_1 = await stream_1.next(), _a = stream_1_1.done, !_a; _d = true) {
+            for (var _e = true, stream_1 = __asyncValues(stream), stream_1_1; stream_1_1 = await stream_1.next(), _a = stream_1_1.done, !_a; _e = true) {
                 _c = stream_1_1.value;
-                _d = false;
+                _e = false;
                 const chunk = _c;
-                res.write(`data: ${JSON.stringify(chunk.choices[0].delta)}\n\n`);
+                if ((_d = chunk.choices[0].delta) === null || _d === void 0 ? void 0 : _d.content) {
+                    res.write(chunk.choices[0].delta.content);
+                }
             }
         }
         catch (e_1_1) { e_1 = { error: e_1_1 }; }
         finally {
             try {
-                if (!_d && !_a && (_b = stream_1.return)) await _b.call(stream_1);
+                if (!_e && !_a && (_b = stream_1.return)) await _b.call(stream_1);
             }
             finally { if (e_1) throw e_1.error; }
         }

@@ -14,11 +14,18 @@ const chatResponseController = async (req: Request, res: Response): Promise<any>
           content: userInput,
         },
       ],
-      stream:true
+      stream:true,
+      max_tokens:100
     });
 
+    res.setHeader("Content-Type", "text/plain");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+
     for await (const chunk of stream) {
-      res.write(`data: ${JSON.stringify(chunk.choices[0].delta)}\n\n`)
+      if (chunk.choices[0].delta?.content) {
+        res.write(chunk.choices[0].delta.content);
+      }
     }
     
     res.end()

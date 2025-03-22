@@ -1,6 +1,9 @@
 import corsHeaders from "@/utility/cors-headers";
 
-async function chatResponseService(userInput: string) {
+async function chatResponseService(
+  userInput: string,
+  onData: (text: string) => void
+) {
   try {
     const response = await fetch("http://localhost:3000/chat/respond", {
       method: "POST",
@@ -9,13 +12,22 @@ async function chatResponseService(userInput: string) {
       headers: corsHeaders(),
     });
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
 
-    const { data } = await response.json();
+    if (!reader) throw new Error("No readable stream found.");
+
+    while (true) {
+      const { done, value } = await reader.read();
+      
+      if (done) break;
+      
+      console.log(Date.now())
+      console.log(decoder.decode(value, { stream: true }))
+      onData(decoder.decode(value, { stream: true })); // Directly pass text to callback
+    }
   } catch (e) {
-    console.error((e as Error).message);
+    console.error((e as Error));
   }
 }
 
