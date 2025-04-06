@@ -1,23 +1,11 @@
-import { MongoClient, ServerApiVersion, Db } from "mongodb";
+import mongoose from "mongoose";
 
 const uri = process.env.DB_CONNECT || "";
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-let db: Db;
-
 try {
-  const conn = await client.connect();
-  db = conn.db("admin");
-
+  mongoose.connect(uri);
+  console.log("Connected to MongoDB");
 } catch (e) {
-  console.error(e);
+  console.error("Error connecting to MongoDB", e);
+  throw e;
 }
-
-export default db!
