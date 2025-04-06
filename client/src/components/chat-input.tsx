@@ -1,22 +1,13 @@
-import userChatAtom from "@/state/user-chat-atom";
-import { IconButton, Group, Input } from "@chakra-ui/react";
-import { IoIosSend } from "react-icons/io";
-import { useAtomValue, useSetAtom } from "jotai";
 import chatResponseService from "@/services/chat-response-service";
-import { useState } from "react";
+
+import userChatStore from "@/state/userChatStore";
+
+import { IoIosSend } from "react-icons/io";
+import { IconButton, Group, Input } from "@chakra-ui/react";
 
 export const ChatInput = () => {
-  const userChat = useAtomValue(userChatAtom);
-  const setUserChat = useSetAtom(userChatAtom);
-  const [messages, setMessages] = useState<string>("");
-
-  const handleChat = async () => {
-    setMessages("");
-
-    await chatResponseService(userChat, (chunk) => {
-      setMessages((prev) => prev + chunk);
-    });
-  };
+  const userChat = userChatStore((state) => state.userChat)
+  const updateUserChat = userChatStore((state) => state.updateUserChat)
 
   return (
     <>
@@ -26,14 +17,13 @@ export const ChatInput = () => {
           focusRing="none"
           placeholder="Ask anything!"
           value={userChat}
-          onChange={(e) => setUserChat(e.target.value)}
+          onChange={(e) => updateUserChat(e.target.value)}
         />
 
         <IconButton variant="solid" rounded="full" onClick={handleChat}>
           <IoIosSend />
         </IconButton>
       </Group>
-      <p>{messages}</p>
     </>
   );
 };

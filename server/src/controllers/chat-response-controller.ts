@@ -5,7 +5,7 @@ const chatResponseController = async (req: Request, res: Response): Promise<any>
   try {
     const { userInput } = req.body;
     const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
+    
     const stream = await client.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -14,10 +14,10 @@ const chatResponseController = async (req: Request, res: Response): Promise<any>
           content: userInput,
         },
       ],
-      stream:true,
-      max_tokens:100
+      stream: true,
+      max_tokens: 100
     });
-
+    
     res.setHeader("Content-Type", "text/plain");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
