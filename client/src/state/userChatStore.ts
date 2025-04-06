@@ -7,7 +7,7 @@ type UserChatState = {
 
 const userChatStore = create<UserChatState>((set) => ({
   userChat: '',
-  updateUserChat: (newChat: string) => set({ userChat: newChat }),
+  updateUserChat: (newChat) => set({ userChat: newChat }),
 }))
 
 export default userChatStore

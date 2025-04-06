@@ -1,9 +1,7 @@
+import chatHistoryStore from "@/state/chatHistoryStore";
 import corsHeaders from "@/utility/cors-headers";
 
-async function chatResponseService(
-  userInput: string,
-  onData: (text: string) => void
-) {
+async function chatResponseService(userInput: string) {
   try {
     const response = await fetch("http://localhost:3000/chat/respond", {
       method: "POST",
@@ -17,15 +15,19 @@ async function chatResponseService(
 
     if (!reader) throw new Error("No readable stream found.");
 
+    const updateChatHistory = chatHistoryStore(
+      (state) => state.updateChatHistory
+    );
+
     while (true) {
       const { done, value } = await reader.read();
-      
+
       if (done) break;
-      
-      onData(decoder.decode(value, { stream: true }));
+
+      updateChatHistory("ai", decoder.decode(value, { stream: true }));
     }
   } catch (e) {
-    console.error((e as Error));
+    console.error(e as Error);
   }
 }
 
