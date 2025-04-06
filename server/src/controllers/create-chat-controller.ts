@@ -1,5 +1,4 @@
 import { Response, Request } from "express";
-import OpenAI from "openai";
 import Chat from "../db/model/Chat.js";
 
 const createChatController = async (
@@ -9,11 +8,7 @@ const createChatController = async (
   try {
     const { type, text } = req.body;
 
-    const chatEntry = new Chat({
-      type,
-      text,
-    });
-
+    const chatEntry = new Chat({ type, text });
     await chatEntry.save();
 
     return res.status(201).json({ message: "Chat entry created successfully" });

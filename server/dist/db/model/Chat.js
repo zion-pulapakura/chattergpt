@@ -4,5 +4,5 @@ const chatSchema = new Schema({
     type: String,
     text: String,
 });
-const Chat = model("Blog", chatSchema);
+const Chat = model("Chat", chatSchema);
 export default Chat;

@@ -3,12 +3,17 @@ import userChatStore from "@/state/userChatStore";
 
 import { IoIosSend } from "react-icons/io";
 import { IconButton, Group, Input } from "@chakra-ui/react";
+import logChatService from "@/services/log-chat-service";
 
 export const ChatInput = () => {
   const userChat = userChatStore((state) => state.userChat);
   const updateUserChat = userChatStore((state) => state.updateUserChat);
 
-  const handleChat = async () => { await chatResponseService(userChat) };
+  const handleChat = async () => {
+    await chatResponseService(userChat);
+
+    logChatService(userChat, "");
+  };
 
   return (
     <>

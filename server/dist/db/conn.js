@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const uri = process.env.DB_CONNECT || "";
 try {
-    mongoose.connect(uri);
+    await mongoose.connect(uri);
     console.log("Connected to MongoDB");
 }
 catch (e) {

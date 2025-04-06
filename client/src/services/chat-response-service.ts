@@ -1,4 +1,3 @@
-import chatHistoryStore from "@/state/chatHistoryStore";
 import corsHeaders from "@/utility/cors-headers";
 
 async function chatResponseService(userInput: string) {
@@ -15,16 +14,12 @@ async function chatResponseService(userInput: string) {
 
     if (!reader) throw new Error("No readable stream found.");
 
-    const updateChatHistory = chatHistoryStore(
-      (state) => state.updateChatHistory
-    );
-
     while (true) {
       const { done, value } = await reader.read();
 
       if (done) break;
 
-      updateChatHistory("ai", decoder.decode(value, { stream: true }));
+      return decoder.decode(value, { stream: true });
     }
   } catch (e) {
     console.error(e as Error);

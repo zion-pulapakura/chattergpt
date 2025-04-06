@@ -2,10 +2,7 @@ import Chat from "../db/model/Chat.js";
 const createChatController = async (req, res) => {
     try {
         const { type, text } = req.body;
-        const chatEntry = new Chat({
-            type,
-            text,
-        });
+        const chatEntry = new Chat({ type, text });
         await chatEntry.save();
         return res.status(201).json({ message: "Chat entry created successfully" });
     }
