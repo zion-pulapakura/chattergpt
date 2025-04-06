@@ -1,10 +1,10 @@
 import corsHeaders from "@/utility/cors-headers";
 
-async function logChatService(userChat: string, aiChat: string) {
+async function logChatService(type: string, chat: string) {
   try {
     const response = await fetch("http://localhost:3000/chat/create", {
       method: "POST",
-      body: JSON.stringify({ text: userChat, type: "user" }),
+      body: JSON.stringify({ text: chat, type }),
       mode: "cors",
       headers: corsHeaders(),
     });
