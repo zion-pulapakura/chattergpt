@@ -4,6 +4,7 @@ import chatResponseService from "@/services/chat-response-service";
 
 import { IoIosSend } from "react-icons/io";
 import { IconButton, Group, Input } from "@chakra-ui/react";
+import logChatService from "@/services/log-chat-service";
 
 export const ChatInput = () => {
   const userChat = userChatStore((state) => state.userChat);
@@ -16,6 +17,9 @@ export const ChatInput = () => {
       const currChat = aiChatStore.getState().aiChat;
       updateAiChat(currChat + chunk);
     });
+
+    await logChatService("user", userChat);
+    await logChatService("ai", aiChatStore.getState().aiChat);
   };
 
   return (
