@@ -1,15 +1,21 @@
 import userChatStore from "@/state/userChatStore";
+import aiChatStore from "@/state/aiChatStore";
+import chatResponseService from "@/services/chat-response-service";
 
 import { IoIosSend } from "react-icons/io";
 import { IconButton, Group, Input } from "@chakra-ui/react";
-import handleQuery from "@/utility/handle-query";
-import aiChatStore from "@/state/aiChatStore";
 
 export const ChatInput = () => {
   const userChat = userChatStore((state) => state.userChat);
-  const aiChat = aiChatStore((state) => state.aiChat);
 
   const updateUserChat = userChatStore((state) => state.updateUserChat);
+
+  const handleQuery = async () => {
+    const chunk = await chatResponseService(userChat);
+    const updateAiChat = aiChatStore((state) => state.updateAiChat);
+  
+    updateAiChat(chunk!)
+  };
 
   return (
     <>
@@ -25,9 +31,7 @@ export const ChatInput = () => {
         <IconButton
           variant="solid"
           rounded="full"
-          onClick={async () => {
-            await handleQuery(userChat, aiChat);
-          }}
+          onClick={handleQuery}
         >
           <IoIosSend />
         </IconButton>
