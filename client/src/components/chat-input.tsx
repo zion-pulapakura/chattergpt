@@ -9,12 +9,13 @@ export const ChatInput = () => {
   const userChat = userChatStore((state) => state.userChat);
 
   const updateUserChat = userChatStore((state) => state.updateUserChat);
+  const updateAiChat = aiChatStore((state) => state.updateAiChat);
 
   const handleQuery = async () => {
-    const chunk = await chatResponseService(userChat);
-    const updateAiChat = aiChatStore((state) => state.updateAiChat);
-  
-    updateAiChat(chunk!)
+    await chatResponseService(userChat, (chunk) => {
+      const currChat = aiChatStore.getState().aiChat;
+      updateAiChat(currChat + chunk);
+    });
   };
 
   return (
@@ -28,11 +29,7 @@ export const ChatInput = () => {
           onChange={(e) => updateUserChat(e.target.value)}
         />
 
-        <IconButton
-          variant="solid"
-          rounded="full"
-          onClick={handleQuery}
-        >
+        <IconButton variant="solid" rounded="full" onClick={handleQuery}>
           <IoIosSend />
         </IconButton>
       </Group>

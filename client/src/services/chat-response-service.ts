@@ -1,6 +1,9 @@
 import corsHeaders from "@/utility/cors-headers";
 
-async function chatResponseService(userInput: string) {
+async function chatResponseService(
+  userInput: string,
+  onData: (data: string) => void
+) {
   try {
     const response = await fetch("http://localhost:3000/chat/respond", {
       method: "POST",
@@ -19,7 +22,7 @@ async function chatResponseService(userInput: string) {
 
       if (done) break;
 
-      return decoder.decode(value, { stream: true });
+      onData(decoder.decode(value, { stream: true }));
     }
   } catch (e) {
     console.error(e as Error);
