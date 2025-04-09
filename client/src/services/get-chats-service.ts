@@ -1,3 +1,4 @@
+import { ChatType } from "@/App";
 import corsHeaders from "@/utility/cors-headers";
 
 async function getAllChats() {
@@ -12,7 +13,7 @@ async function getAllChats() {
     }
 
     const { userChats, aiChats } = await response.json();
-    return { userChats, aiChats };
+    return { userChats: (userChats as ChatType[]), aiChats: (aiChats as ChatType[]) };
   } catch (e) {
     console.error(e as Error);
   }

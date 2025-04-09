@@ -4,6 +4,13 @@ import { ChatInput } from "./components/chat-input";
 import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
 
+export type ChatType = {
+  _id: string;
+  text: string;
+  type: "user" | "ai";
+  __v: number;
+};
+
 function App() {
   const aiChat = aiChatStore((state) => state.aiChat);
 
