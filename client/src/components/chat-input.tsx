@@ -24,7 +24,14 @@ export const ChatInput = () => {
 
   return (
     <>
-      <Group height='100%' width='100%' rounded="full" paddingX="2" paddingY="1" border="1px solid black">
+      <Group
+        height="100%"
+        width="100%"
+        rounded="full"
+        paddingX="2"
+        paddingY="1"
+        border="1px solid black"
+      >
         <Input
           border="none"
           focusRing="none"

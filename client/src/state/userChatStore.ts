@@ -1,13 +1,13 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
 type UserChatState = {
-  userChat: string,
-  updateUserChat: (newChat: string) => void,
-}
+  userChat: string;
+  updateUserChat: (newChat: string) => void;
+};
 
 const userChatStore = create<UserChatState>((set) => ({
-  userChat: '',
+  userChat: "",
   updateUserChat: (newChat) => set({ userChat: newChat }),
-}))
+}));
 
-export default userChatStore
+export default userChatStore;

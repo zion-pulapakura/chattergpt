@@ -13,7 +13,10 @@ async function getAllChats() {
     }
 
     const { userChats, aiChats } = await response.json();
-    return { userChats: (userChats as ChatType[]), aiChats: (aiChats as ChatType[]) };
+    return {
+      userChats: userChats as ChatType[],
+      aiChats: aiChats as ChatType[],
+    };
   } catch (e) {
     console.error(e as Error);
   }
