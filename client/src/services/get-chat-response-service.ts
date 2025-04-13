@@ -1,6 +1,6 @@
 import corsHeaders from "@/utility/cors-headers";
 
-async function getChatResponseService(
+async function getChatResponse(
   userInput: string,
   onData: (data: string) => void
 ) {
@@ -29,4 +29,4 @@ async function getChatResponseService(
   }
 }
 
-export default getChatResponseService;
+export default getChatResponse;
