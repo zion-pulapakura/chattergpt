@@ -1,4 +1,4 @@
-import { Group, VStack, Text, Flex, Box } from "@chakra-ui/react";
+import { Group, VStack, Text } from "@chakra-ui/react";
 import { ChatInput } from "./components/chat-input";
 import { MessagesList } from "./components/messages-list";
 import Message from "./components/message";
@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
 import chatHistoryStore from "./state/chatHistoryStore";
 import isHistoryLoadedStore from "./state/isHistoryLoadedStore";
-import getAllChats from "./services/get-chats-service";
 import userChatStore from "./state/userChatStore";
+import fetchChatHistory from "./utility/fetch-chat-history";
 
 export type ChatType = {
   text: string;
@@ -25,26 +25,8 @@ function App() {
   const switchIsLoaded = isHistoryLoadedStore((state) => state.switchIsLoaded);
 
   useEffect(() => {
-    const fetchChats = async () => {
-      const data = await getAllChats();
-
-      if (!data) return;
-      if (data.userChats.length === 0) return;
-      if (data.aiChats.length === 0) return;
-
-      const orderedList = [];
-
-      for (let i = 0; i < data.userChats.length; i++) {
-        orderedList.push(data.userChats[i]);
-        orderedList.push(data.aiChats[i]);
-      }
-
-      setChatHistory(orderedList);
-      switchIsLoaded();
-    };
-
     if (!isHistoryLoaded) {
-      fetchChats();
+      fetchChatHistory(setChatHistory, switchIsLoaded);
     }
   }, []);
 

@@ -7,10 +7,12 @@ export const Message = ({
   type: "user" | "ai";
   text: string;
 }) => {
-
   return (
     <Box>
-      <Flex justify={type === "user" ? "flex-start" : "flex-end"} mt={type === "user" ? 0 : 2}>
+      <Flex
+        justify={type === "user" ? "flex-start" : "flex-end"}
+        mt={type === "user" ? 0 : 2}
+      >
         <Box
           bg="gray.100"
           px={4}
