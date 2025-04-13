@@ -1,27 +1,32 @@
 import userChatStore from "@/state/userChatStore";
 import aiChatStore from "@/state/aiChatStore";
-import chatResponseService from "@/services/chat-response-service";
+import getChatResponseService from "@/services/get-chat-response-service";
 
 import { IoIosSend } from "react-icons/io";
 import { IconButton, Group, Input } from "@chakra-ui/react";
-import logChatService from "@/services/log-chat-service";
+import logChatToDBService from "@/services/log-chat-service";
+import chatHistoryStore from "@/state/chatHistoryStore";
 
 export const ChatInput = () => {
   const userChat = userChatStore((state) => state.userChat);
 
+  const updateChatHistory = chatHistoryStore(
+    (state) => state.updateChatHistory
+  );
   const updateUserChat = userChatStore((state) => state.updateUserChat);
   const updateAiChat = aiChatStore((state) => state.updateAiChat);
 
   const handleQuery = async () => {
-    updateUserChat("");
-    updateAiChat("");
-    await chatResponseService(userChat, (chunk) => {
+    await getChatResponseService(userChat, (chunk) => {
       const currChat = aiChatStore.getState().aiChat;
       updateAiChat(currChat + chunk);
     });
 
-    await logChatService("user", userChat);
-    await logChatService("ai", aiChatStore.getState().aiChat);
+    await logChatToDBService("user", userChat);
+    await logChatToDBService("ai", aiChatStore.getState().aiChat);
+
+    updateChatHistory(userChat, "user");
+    updateChatHistory(aiChatStore.getState().aiChat, "ai");
   };
 
   return (

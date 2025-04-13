@@ -1,6 +1,6 @@
 import corsHeaders from "@/utility/cors-headers";
 
-async function logChatService(type: string, chat: string) {
+async function logChatToDBService(type: string, chat: string) {
   try {
     const response = await fetch("http://localhost:3000/chat/create", {
       method: "POST",
@@ -20,4 +20,4 @@ async function logChatService(type: string, chat: string) {
   }
 }
 
-export default logChatService;
+export default logChatToDBService;

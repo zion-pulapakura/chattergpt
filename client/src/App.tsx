@@ -4,13 +4,10 @@ import { MessagesList } from "./components/messages-list";
 
 import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
-import userChatStore from "./state/userChatStore";
 
 export type ChatType = {
-  _id: string;
   text: string;
   type: "user" | "ai";
-  __v: number;
 };
 
 function App() {
