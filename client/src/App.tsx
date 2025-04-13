@@ -1,9 +1,10 @@
-import { Group, VStack, Text } from "@chakra-ui/react";
+import { Group, VStack, Text, Flex, Box } from "@chakra-ui/react";
 import { ChatInput } from "./components/chat-input";
 import { MessagesList } from "./components/messages-list";
 
 import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
+import userChatStore from "./state/userChatStore";
 
 export type ChatType = {
   _id: string;
@@ -21,10 +22,16 @@ function App() {
 
   return (
     <Group width="lvw" height="lvh" padding="1.5em" backgroundColor="blue.100">
-      <VStack align="stretch">
+      <VStack align="stretch" width="100%" height="100%">
         <Text width="100%" height="80%" backgroundColor="green">
           <MessagesList />
-          {aiChat}
+          {aiChat && (
+            <Flex justify="flex-end" mt={2}>
+              <Box bg="blue.200" px={4} py={2} rounded="lg" maxWidth="70%">
+                <Text>{aiChat}</Text>
+              </Box>
+            </Flex>
+          )}
         </Text>
         <Group>
           <ChatInput />

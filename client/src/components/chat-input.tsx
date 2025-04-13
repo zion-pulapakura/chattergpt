@@ -13,6 +13,8 @@ export const ChatInput = () => {
   const updateAiChat = aiChatStore((state) => state.updateAiChat);
 
   const handleQuery = async () => {
+    updateUserChat("");
+    updateAiChat("");
     await chatResponseService(userChat, (chunk) => {
       const currChat = aiChatStore.getState().aiChat;
       updateAiChat(currChat + chunk);

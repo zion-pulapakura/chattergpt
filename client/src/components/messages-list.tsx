@@ -14,9 +14,18 @@ export const MessagesList = () => {
       const data = await getAllChats();
 
       if (!data) return;
+      if (data.userChats.length === 0) return;
+      if (data.aiChats.length === 0) return;
 
-      setUserChats(data.userChats);
-      setAiChats(data.aiChats); // Drop the last one (it's streaming)
+      setUserChats(data.userChats); // Drop the last one (we are already displaying it)
+
+      if (aiChat) {
+        setAiChats(data.aiChats.slice(0, -1)); // Drop the last one (it's streaming)
+      } else {
+        setAiChats(data.aiChats);
+      }
+
+      console.log(userChats, aiChats);
     };
 
     fetchChats();
@@ -26,7 +35,6 @@ export const MessagesList = () => {
     <Flex direction="column" width="100%" p={4} gap={3}>
       {userChats.map((userMsg, i) => (
         <Box key={i}>
-          {/* User Message */}
           <Flex justify="flex-start">
             <Box
               bg="gray.100"
@@ -40,7 +48,6 @@ export const MessagesList = () => {
             </Box>
           </Flex>
 
-          {/* AI Message (if it exists) */}
           {aiChats[i] && (
             <Flex justify="flex-end" mt={2}>
               <Box
