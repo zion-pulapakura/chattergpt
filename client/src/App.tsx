@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
 import chatHistoryStore from "./state/chatHistoryStore";
 import isHistoryLoadedStore from "./state/isHistoryLoadedStore";
-import userChatStore from "./state/userChatStore";
 import fetchChatHistory from "./utility/fetch-chat-history";
 
 export type ChatType = {

@@ -10,18 +10,17 @@ const chatResponseController = async (req, res) => {
     var _a, e_1, _b, _c;
     var _d;
     try {
-        const { userInput } = req.body;
+        const { chatHistory } = req.body;
         const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+        const formattedChatHistory = formatChatHistory(chatHistory);
         const stream = await client.chat.completions.create({
             model: "gpt-4o",
             messages: [
-                {
-                    role: "user",
-                    content: userInput,
-                },
+                { role: "system", content: "You are a helpful assistant." },
+                ...formattedChatHistory,
             ],
             stream: true,
-            max_tokens: 100
+            max_tokens: 100,
         });
         res.setHeader("Content-Type", "text/plain");
         res.setHeader("Cache-Control", "no-cache");
@@ -49,4 +48,10 @@ const chatResponseController = async (req, res) => {
         return res.status(500).json({ message: e.message });
     }
 };
+function formatChatHistory(chatHistory) {
+    return chatHistory.map(({ type, text }) => ({
+        role: type === "user" ? "user" : "assistant",
+        content: text,
+    }));
+}
 export default chatResponseController;

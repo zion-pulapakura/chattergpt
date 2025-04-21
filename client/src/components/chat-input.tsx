@@ -24,7 +24,7 @@ export const ChatInput = () => {
 
     updateChatHistory(userChat, "user");
 
-    await getChatResponse(userChat, (chunk) => {
+    await getChatResponse((chunk) => {
       const currChat = aiChatStore.getState().aiChat;
       updateAiChat(currChat + chunk);
     });
