@@ -39,7 +39,7 @@ function App() {
         >
           <MessagesList />
         </Text>
-        <Group paddingX="1em">
+        <Group justifyContent="center" paddingX="1em">
           <ChatInput />
         </Group>
       </VStack>

@@ -38,7 +38,7 @@ export const ChatInput = () => {
     <>
       <Group
         height="100%"
-        width="100%"
+        width="50%"
         rounded="full"
         paddingX="3"
         paddingY="2"
