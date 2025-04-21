@@ -18,9 +18,11 @@ export const ChatInput = () => {
 
   const handleQuery = async () => {
     if (aiChatStore.getState().aiChat) {
-      updateChatHistory(userChat, "user");
       updateChatHistory(aiChatStore.getState().aiChat, "ai");
+      updateAiChat("");
     }
+
+    updateChatHistory(userChat, "user");
 
     await getChatResponse(userChat, (chunk) => {
       const currChat = aiChatStore.getState().aiChat;
@@ -29,6 +31,7 @@ export const ChatInput = () => {
 
     await logChatToDB("user", userChat);
     await logChatToDB("ai", aiChatStore.getState().aiChat);
+
   };
 
   return (

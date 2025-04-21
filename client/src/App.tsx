@@ -35,9 +35,7 @@ function App() {
       <VStack align="stretch" width="100%" height="100%">
         <Text width="100%" height="80%" backgroundColor="green">
           <MessagesList />
-          {userChatStore.getState().userChat && (
-            <Message type="user" text={userChatStore.getState().userChat} />
-          )}
+
           {aiChat && <Message type="ai" text={aiChat} />}
         </Text>
         <Group>
