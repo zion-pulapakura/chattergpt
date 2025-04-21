@@ -1,0 +1,13 @@
+{
+  "name": "chattergpt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd server && npm run server",
+    "client": "cd client && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
