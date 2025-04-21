@@ -20,7 +20,6 @@ const chatResponseController = async (req, res) => {
                 ...formattedChatHistory,
             ],
             stream: true,
-            max_tokens: 100,
         });
         res.setHeader("Content-Type", "text/plain");
         res.setHeader("Cache-Control", "no-cache");

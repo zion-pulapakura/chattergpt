@@ -20,7 +20,6 @@ const chatResponseController = async (
       ],
 
       stream: true,
-      max_tokens: 100,
     });
 
     res.setHeader("Content-Type", "text/plain");
