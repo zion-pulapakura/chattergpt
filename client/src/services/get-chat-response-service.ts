@@ -1,13 +1,13 @@
 import chatHistoryStore from "@/state/chatHistoryStore";
 import corsHeaders from "@/utility/cors-headers";
 
-async function getChatResponse(
-  onData: (data: string) => void
-) {
+async function getChatResponse(onData: (data: string) => void) {
   try {
     const response = await fetch("http://localhost:3000/chat/respond", {
       method: "POST",
-      body: JSON.stringify({ chatHistory: chatHistoryStore.getState().chatHistory }),
+      body: JSON.stringify({
+        chatHistory: chatHistoryStore.getState().chatHistory,
+      }),
       mode: "cors",
       headers: corsHeaders(),
     });
