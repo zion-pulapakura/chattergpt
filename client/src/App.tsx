@@ -3,11 +3,9 @@ import { ChatInput } from "./components/chat-input";
 import { MessagesList } from "./components/messages-list";
 
 import { useEffect } from "react";
-import aiChatStore from "./state/aiChatStore";
 import chatHistoryStore from "./state/chatHistoryStore";
 import isHistoryLoadedStore from "./state/isHistoryLoadedStore";
 import fetchChatHistory from "./utility/fetch-chat-history";
-import AiMessage from "./components/ai-message";
 
 export type ChatType = {
   text: string;
@@ -29,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <Group width="lvw" height="lvh" backgroundColor="gray.300">
+    <Group width="lvw" height="lvh" backgroundColor="gray.700">
       <VStack align="stretch" width="100%" height="100%">
         <Text
           padding="1em"

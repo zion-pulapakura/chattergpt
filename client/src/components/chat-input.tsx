@@ -39,9 +39,8 @@ export const ChatInput = () => {
         height="100%"
         width="100%"
         rounded="full"
-        paddingX="2"
-        paddingY="1"
-        border="1px solid black"
+        paddingX="3"
+        paddingY="2"
         backgroundColor="white"
       >
         <Input

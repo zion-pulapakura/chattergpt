@@ -5,14 +5,14 @@ export const UserMessage = ({ text }: { text: string }) => {
     <Box>
       <Flex justify="flex-end">
         <Box
-          bg="gray.100"
-          px={4}
-          py={2}
+          bg="gray.800"
+          px={5}
+          py={3}
           rounded="lg"
           maxWidth="70%"
           wordBreak="break-word"
         >
-          <Text>{text}</Text>
+          <Text color="white">{text}</Text>
         </Box>
       </Flex>
     </Box>
