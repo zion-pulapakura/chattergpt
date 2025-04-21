@@ -1,13 +1,13 @@
 import { Group, VStack, Text } from "@chakra-ui/react";
 import { ChatInput } from "./components/chat-input";
 import { MessagesList } from "./components/messages-list";
-import Message from "./components/message";
 
 import { useEffect } from "react";
 import aiChatStore from "./state/aiChatStore";
 import chatHistoryStore from "./state/chatHistoryStore";
 import isHistoryLoadedStore from "./state/isHistoryLoadedStore";
 import fetchChatHistory from "./utility/fetch-chat-history";
+import AiMessage from "./components/ai-message";
 
 export type ChatType = {
   text: string;
@@ -15,7 +15,6 @@ export type ChatType = {
 };
 
 function App() {
-  const aiChat = aiChatStore((state) => state.aiChat);
   const setChatHistory = chatHistoryStore((state) => state.setChatHistory);
 
   const isHistoryLoaded = isHistoryLoadedStore(
@@ -30,14 +29,19 @@ function App() {
   }, []);
 
   return (
-    <Group width="lvw" height="lvh" padding="1.5em" backgroundColor="blue.100">
+    <Group width="lvw" height="lvh" backgroundColor="gray.300">
       <VStack align="stretch" width="100%" height="100%">
-        <Text width="100%" height="80%" backgroundColor="green">
+        <Text
+          padding="1em"
+          width="100%"
+          height="90%"
+          maxHeight="90%"
+          overflowY="auto"
+          scrollBehavior="smooth"
+        >
           <MessagesList />
-
-          {aiChat && <Message type="ai" text={aiChat} />}
         </Text>
-        <Group>
+        <Group paddingX="1em">
           <ChatInput />
         </Group>
       </VStack>

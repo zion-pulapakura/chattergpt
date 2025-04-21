@@ -1,18 +1,9 @@
 import { Flex, Box, Text } from "@chakra-ui/react";
 
-export const Message = ({
-  type,
-  text,
-}: {
-  type: "user" | "ai";
-  text: string;
-}) => {
+export const UserMessage = ({ text }: { text: string }) => {
   return (
     <Box>
-      <Flex
-        justify={type === "user" ? "flex-start" : "flex-end"}
-        mt={type === "user" ? 0 : 2}
-      >
+      <Flex justify="flex-end">
         <Box
           bg="gray.100"
           px={4}
@@ -28,4 +19,4 @@ export const Message = ({
   );
 };
 
-export default Message;
+export default UserMessage;

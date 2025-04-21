@@ -31,7 +31,6 @@ export const ChatInput = () => {
 
     await logChatToDB("user", userChat);
     await logChatToDB("ai", aiChatStore.getState().aiChat);
-
   };
 
   return (
@@ -43,6 +42,7 @@ export const ChatInput = () => {
         paddingX="2"
         paddingY="1"
         border="1px solid black"
+        backgroundColor="white"
       >
         <Input
           border="none"
@@ -50,6 +50,11 @@ export const ChatInput = () => {
           placeholder="Ask anything!"
           value={userChat}
           onChange={(e) => updateUserChat(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleQuery();
+            }
+          }}
         />
 
         <IconButton variant="solid" rounded="full" onClick={handleQuery}>
